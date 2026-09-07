@@ -303,13 +303,13 @@ export default function CakeEatingStage({ onNextStep }) {
         </motion.button>
       </motion.div>
 
-      {/* Next Step Action Button: Goes directly to Letter Stage */}
+      {/* Next Step Action Button: Goes directly to Gift Stage */}
       <div className="mt-2">
         <button
           onClick={onNextStep}
           className="px-9 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 active:scale-95 text-white font-black text-sm sm:text-base shadow-xl shadow-pink-500/30 transition-all duration-200 flex items-center gap-2.5 cursor-pointer group"
         >
-          <span>পরবর্তী ধাপ: ভালোবাসার চিরকুট বয়াম 🫙</span>
+          <span>পরবর্তী ধাপ: উপহারের বক্স খুলুন 🎁</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
         </button>
       </div>

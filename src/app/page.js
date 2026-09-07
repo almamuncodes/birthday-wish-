@@ -10,7 +10,6 @@ import BalloonsStage from "../components/party/BalloonsStage";
 import CandlesStage from "../components/party/CandlesStage";
 import CakeCutStage from "../components/party/CakeCutStage";
 import CakeEatingStage from "../components/party/CakeEatingStage";
-import ComplimentJarStage from "../components/party/ComplimentJarStage";
 import GiftStage from "../components/party/GiftStage";
 
 const stepTitles = {
@@ -19,14 +18,13 @@ const stepTitles = {
   3: "মোমবাতি নেভানো 🕯️",
   4: "কেক কাটা 🎂",
   5: "কেক খাওয়ানো 🍰",
-  6: "চিরকুট বয়াম 🫙",
-  7: "উপহার ও চিঠি 🎁",
+  6: "উপহার ও চিঠি 🎁",
 };
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const totalSteps = 7;
+  const totalSteps = 6;
 
   const goToNextStep = () => {
     setDirection(1);
@@ -164,20 +162,6 @@ export default function Home() {
           {currentStep === 6 && (
             <motion.div
               key="stage-6"
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="w-full"
-            >
-              <ComplimentJarStage onNextStep={goToNextStep} />
-            </motion.div>
-          )}
-
-          {currentStep === 7 && (
-            <motion.div
-              key="stage-7"
               custom={direction}
               variants={variants}
               initial="enter"
