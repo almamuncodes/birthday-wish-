@@ -27,72 +27,82 @@ export default function LightsStage({ onNextStep }) {
           : "bg-slate-950"
       }`}
     >
-      {/* Fairy Lights hanging from top (visible when light is ON) */}
+      {/* Real Colorful Hanging Balloons from ceiling (visible when light is ON) */}
       <AnimatePresence>
         {isLightOn && (
           <motion.div
-            initial={{ opacity: 0, y: -40 }}
+            initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="absolute top-0 inset-x-0 flex justify-around px-4 pointer-events-none z-20"
+            className="absolute top-0 inset-x-0 flex justify-around px-2 sm:px-6 pointer-events-none z-20 overflow-hidden"
           >
-            {[...Array(14)].map((_, i) => {
-              const colors = [
-                "bg-pink-400 shadow-pink-300",
-                "bg-amber-300 shadow-amber-200",
-                "bg-cyan-300 shadow-cyan-200",
-                "bg-purple-400 shadow-purple-300",
-                "bg-rose-400 shadow-rose-300",
-              ];
-              const bulbColor = colors[i % colors.length];
-              return (
-                <div key={i} className="flex flex-col items-center">
-                  <div className="w-[1px] h-6 sm:h-10 bg-slate-400/50" />
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.25, 1],
-                      opacity: [0.8, 1, 0.8],
-                    }}
-                    transition={{
-                      duration: 1.2 + (i % 5) * 0.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className={`w-3.5 h-4 sm:w-4 sm:h-5 rounded-full ${bulbColor} shadow-[0_0_15px_4px]`}
-                  />
+            {[
+              { color: "from-pink-400 to-rose-500", stringH: "h-20 sm:h-24", rot: [-4, 4, -4], dur: 3.2 },
+              { color: "from-purple-400 to-indigo-500", stringH: "h-14 sm:h-18", rot: [4, -4, 4], dur: 3.8 },
+              { color: "from-amber-300 to-orange-400", stringH: "h-24 sm:h-30", rot: [-3, 3, -3], dur: 3.5 },
+              { color: "from-rose-400 to-pink-500", stringH: "h-16 sm:h-20", rot: [5, -5, 5], dur: 4.1 },
+              { color: "from-emerald-300 to-teal-400", stringH: "h-22 sm:h-28", rot: [-4, 4, -4], dur: 3.6 },
+              { color: "from-sky-300 to-blue-400", stringH: "h-14 sm:h-18", rot: [3, -3, 3], dur: 3.9 },
+              { color: "from-fuchsia-400 to-purple-600", stringH: "h-20 sm:h-26", rot: [-5, 5, -5], dur: 3.4 },
+            ].map((balloon, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  rotate: balloon.rot,
+                  y: [-3, 3, -3],
+                }}
+                transition={{
+                  duration: balloon.dur,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="flex flex-col items-center origin-top"
+              >
+                {/* Long string reaching down from ceiling so balloons hang safely below header */}
+                <div className={`w-[1px] ${balloon.stringH} bg-slate-400/50`} />
+                {/* Knot */}
+                <div className="w-2 h-1 bg-black/30 rounded-t-xs" />
+                {/* 3D Glossy Balloon Body */}
+                <div
+                  className={`w-7 h-9 sm:w-9 sm:h-12 rounded-[50%_50%_50%_50%/40%_40%_60%_60%] bg-gradient-to-tr ${balloon.color} shadow-lg relative flex items-center justify-center border-t border-l border-white/60 -mt-0.5`}
+                >
+                  {/* Glossy curved highlight */}
+                  <div className="absolute top-1.5 left-1.5 w-1.5 h-3.5 rounded-full bg-white/50 blur-[0.3px] -rotate-25" />
                 </div>
-              );
-            })}
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating party flags / Bunting (when light is ON) */}
+      {/* Floating party flags / Bunting (placed cleanly below header, when light is ON) */}
       <AnimatePresence>
         {isLightOn && (
           <motion.div
             initial={{ opacity: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleY: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="absolute top-12 sm:top-16 inset-x-0 flex justify-center gap-1.5 sm:gap-2 px-2 pointer-events-none z-10"
+            className="absolute top-24 sm:top-28 inset-x-0 flex justify-center gap-1 sm:gap-1.5 px-2 pointer-events-none z-10"
           >
-            {["শৃ", "ভ", " ", "জ", "ন্ম", "দি", "ন", " ", "আ", "পু", "!", "👑"].map(
+            {["শু", "ভ", " ", "জ", "ন্ম", "দি", "ন", " ", "ফা", "তে", "মা", " ", "আ", "পু", "!", "👑"].map(
               (char, idx) => (
                 <motion.span
                   key={idx}
                   animate={{ y: [0, -3, 0] }}
                   transition={{
                     duration: 2,
-                    delay: idx * 0.1,
+                    delay: idx * 0.08,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className={`px-2 sm:px-3 py-1 rounded-b-xl text-xs sm:text-sm font-extrabold shadow-sm ${
-                    idx % 3 === 0
+                  className={`px-1.5 py-1 sm:px-2.5 sm:py-1.5 rounded-b-lg sm:rounded-b-xl text-[11px] sm:text-xs md:text-sm font-black shadow-sm ${
+                    char === " "
+                      ? "w-1 sm:w-2"
+                      : idx % 3 === 0
                       ? "bg-pink-500 text-white"
                       : idx % 3 === 1
                       ? "bg-purple-500 text-white"
-                      : "bg-amber-400 text-slate-800"
+                      : "bg-amber-400 text-slate-900"
                   }`}
                 >
                   {char}
@@ -153,7 +163,7 @@ export default function LightsStage({ onNextStep }) {
             initial={{ opacity: 0, scale: 0.85, y: 25 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center mt-14 sm:mt-8"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/90 text-pink-600 border border-pink-200/80 text-xs sm:text-sm font-bold mb-4 shadow-sm">
               <PartyPopper className="w-4 h-4 text-pink-500" />

@@ -15,11 +15,11 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="fixed top-5 right-5 z-40">
+    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40">
       <button
         onClick={toggleMusic}
         title={isPlaying ? "মিউজিক বন্ধ করুন" : "মিউজিক চালু করুন"}
-        className="glass-pill px-4 py-2.5 rounded-full flex items-center gap-2.5 text-xs font-semibold text-slate-700 hover:text-pink-600 active:scale-95 shadow-lg border border-white/80 cursor-pointer transition-all duration-200"
+        className="glass-panel px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-pink-600 active:scale-95 shadow-xl border border-white/90 bg-white/90 cursor-pointer transition-all duration-200"
       >
         {isPlaying ? (
           <>
