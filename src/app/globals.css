@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fcfaff;
+  --foreground: #1e1b2e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-bengali), "Hind Siliguri", "Kalpurush", "SolaimanLipi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  selection-background-color: #f472b6;
+  selection-color: #ffffff;
+}
+
+/* Glassmorphism Styles (Apple-inspired translucent frosted glass) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 20px 50px rgba(190, 150, 220, 0.12),
+              0 1px 3px rgba(0, 0, 0, 0.04),
+              inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.glass-panel-interactive {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(180, 140, 210, 0.08),
+              0 1px 2px rgba(0, 0, 0, 0.03),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(244, 114, 182, 0.4);
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.14),
+              0 0 25px rgba(216, 180, 254, 0.3),
+              inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+/* Subtle Gradient Glow Text */
+.text-gradient-apple {
+  background: linear-gradient(135deg, #1f1d2b 0%, #4b3869 50%, #e11d48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-pink {
+  background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Candle Flame Flicker Keyframes */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px #f59e0b) drop-shadow(0 0 16px #ef4444);
+  }
+  25% {
+    transform: scale(1.08, 0.96) rotate(1.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px #fbbf24) drop-shadow(0 0 20px #f97316);
+  }
+  50% {
+    transform: scale(0.95, 1.05) rotate(-2deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px #f59e0b) drop-shadow(0 0 14px #ef4444);
+  }
+  75% {
+    transform: scale(1.04, 1.02) rotate(1deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px #fcd34d) drop-shadow(0 0 18px #f97316);
+  }
+}
+
+.animate-flame {
+  animation: flameFlicker 1.8s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+/* Smoke drift when candles are blown */
+@keyframes smokeRise {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(2.2);
+  }
+}
+
+.animate-smoke {
+  animation: smokeRise 1.6s forwards ease-out;
+}
+
+/* Gentle floating animation for background orbs */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(4deg);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatSlow 8.5s ease-in-out 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(245, 243, 255, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(216, 180, 254, 0.6);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 132, 252, 0.9);
 }

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="24" fill="url(#bg2)"/>
+  <circle cx="160" cy="380" r="100" fill="#ffffff" opacity="0.2"/>
+  <circle cx="680" cy="140" r="110" fill="#ffffff" opacity="0.25"/>
+  
+  <g transform="translate(400, 210)" text-anchor="middle">
+    <circle cx="0" cy="-30" r="50" fill="#ffffff" filter="url(#glow2)" opacity="0.95"/>
+    <text x="0" y="-15" font-size="40" text-anchor="middle">☕</text>
+    
+    <text x="0" y="65" fill="#ffffff" font-family="'Hind Siliguri', 'Kalpurush', sans-serif" font-size="30" font-weight="bold">
+      রাতজাগা আড্ডা ও খুনসুটি
+    </text>
+    <text x="0" y="102" fill="#ffffff" font-family="'Hind Siliguri', sans-serif" font-size="16" opacity="0.95">
+      [ আপনার আসল ছবি দিন: /public/images/memory2.jpg ]
+    </text>
+  </g>
+</svg>

@@ -1,69 +1,195 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import BackgroundGradients from "../components/BackgroundGradients";
+import StepProgressBar from "../components/StepProgressBar";
+import MusicPlayer from "../components/MusicPlayer";
+import LightsStage from "../components/party/LightsStage";
+import BalloonsStage from "../components/party/BalloonsStage";
+import CandlesStage from "../components/party/CandlesStage";
+import CakeCutStage from "../components/party/CakeCutStage";
+import CakeEatingStage from "../components/party/CakeEatingStage";
+import ComplimentJarStage from "../components/party/ComplimentJarStage";
+import GiftStage from "../components/party/GiftStage";
+
+const stepTitles = {
+  1: "বাতি জ্বালানো 💡",
+  2: "বেলুন ফাটানো 🎈",
+  3: "মোমবাতি নেভানো 🕯️",
+  4: "কেক কাটা 🎂",
+  5: "কেক খাওয়ানো 🍰",
+  6: "চিরকুট বয়াম 🫙",
+  7: "উপহার ও চিঠি 🎁",
+};
 
 export default function Home() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [direction, setDirection] = useState(1);
+  const totalSteps = 7;
+
+  const goToNextStep = () => {
+    setDirection(1);
+    setCurrentStep((prev) => Math.min(prev + 1, totalSteps));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const goToPrevStep = () => {
+    setDirection(-1);
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const restartParty = () => {
+    setDirection(-1);
+    setCurrentStep(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 80 : -80,
+      opacity: 0,
+      scale: 0.96,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+    exit: (dir) => ({
+      x: dir > 0 ? -80 : 80,
+      opacity: 0,
+      scale: 0.96,
+      transition: {
+        duration: 0.35,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    }),
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="relative min-h-screen overflow-x-hidden selection:bg-pink-300 selection:text-slate-900">
+      {/* Background Orbs (only when lights are on / step > 1) */}
+      {currentStep > 1 && <BackgroundGradients />}
+
+      {/* Floating Ambient Music Audio Player */}
+      <MusicPlayer />
+
+      {/* Top Step Progress Bar */}
+      <StepProgressBar
+        currentStep={currentStep}
+        totalSteps={totalSteps}
+        stepTitle={stepTitles[currentStep] || ""}
+        onPrevStep={goToPrevStep}
+      />
+
+      {/* 7 Streamlined Party Stages */}
+      <div className="relative z-10 w-full min-h-screen">
+        <AnimatePresence mode="wait" custom={direction}>
+          {currentStep === 1 && (
+            <motion.div
+              key="stage-1"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <LightsStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 2 && (
+            <motion.div
+              key="stage-2"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              <BalloonsStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 3 && (
+            <motion.div
+              key="stage-3"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
+            >
+              <CandlesStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 4 && (
+            <motion.div
+              key="stage-4"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
+            >
+              <CakeCutStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 5 && (
+            <motion.div
+              key="stage-5"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
+            >
+              <CakeEatingStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 6 && (
+            <motion.div
+              key="stage-6"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
+            >
+              <ComplimentJarStage onNextStep={goToNextStep} />
+            </motion.div>
+          )}
+
+          {currentStep === 7 && (
+            <motion.div
+              key="stage-7"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full"
+            >
+              <GiftStage onRestart={restartParty} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </main>
   );
 }

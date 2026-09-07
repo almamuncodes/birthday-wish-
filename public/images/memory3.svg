@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="50%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#fda4af" />
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="24" fill="url(#bg3)"/>
+  <circle cx="220" cy="140" r="85" fill="#ffffff" opacity="0.25"/>
+  <circle cx="600" cy="360" r="130" fill="#ffffff" opacity="0.2"/>
+  
+  <g transform="translate(400, 210)" text-anchor="middle">
+    <circle cx="0" cy="-30" r="50" fill="#ffffff" filter="url(#glow3)" opacity="0.95"/>
+    <text x="0" y="-15" font-size="40" text-anchor="middle">👰</text>
+    
+    <text x="0" y="65" fill="#ffffff" font-family="'Hind Siliguri', 'Kalpurush', sans-serif" font-size="30" font-weight="bold">
+      সবচেয়ে রূপবতী নববধূ
+    </text>
+    <text x="0" y="102" fill="#ffffff" font-family="'Hind Siliguri', sans-serif" font-size="16" opacity="0.95">
+      [ আপনার আসল ছবি দিন: /public/images/memory3.jpg ]
+    </text>
+  </g>
+</svg>
