@@ -27,23 +27,30 @@ export default function LightsStage({ onNextStep }) {
           : "bg-slate-950"
       }`}
     >
-      {/* Real Colorful Hanging Balloons from ceiling (visible when light is ON) */}
+      {/* Real Colorful Hanging Balloons from ceiling (staggered above and below the text banner) */}
       <AnimatePresence>
         {isLightOn && (
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="absolute top-0 inset-x-0 flex justify-around px-2 sm:px-6 pointer-events-none z-20 overflow-hidden"
+            className="absolute top-0 inset-x-0 flex justify-around px-2 sm:px-6 pointer-events-none z-10 overflow-hidden"
           >
             {[
-              { color: "from-pink-400 to-rose-500", stringH: "h-20 sm:h-24", rot: [-4, 4, -4], dur: 3.2 },
-              { color: "from-purple-400 to-indigo-500", stringH: "h-14 sm:h-18", rot: [4, -4, 4], dur: 3.8 },
-              { color: "from-amber-300 to-orange-400", stringH: "h-24 sm:h-30", rot: [-3, 3, -3], dur: 3.5 },
-              { color: "from-rose-400 to-pink-500", stringH: "h-16 sm:h-20", rot: [5, -5, 5], dur: 4.1 },
-              { color: "from-emerald-300 to-teal-400", stringH: "h-22 sm:h-28", rot: [-4, 4, -4], dur: 3.6 },
-              { color: "from-sky-300 to-blue-400", stringH: "h-14 sm:h-18", rot: [3, -3, 3], dur: 3.9 },
-              { color: "from-fuchsia-400 to-purple-600", stringH: "h-20 sm:h-26", rot: [-5, 5, -5], dur: 3.4 },
+              // 0: Below text
+              { color: "from-pink-400 to-rose-500", stringH: "h-36 sm:h-42", rot: [-4, 4, -4], dur: 3.2 },
+              // 1: Above text
+              { color: "from-purple-400 to-indigo-500", stringH: "h-6 sm:h-8", rot: [4, -4, 4], dur: 3.8 },
+              // 2: Below text
+              { color: "from-amber-300 to-orange-400", stringH: "h-38 sm:h-44", rot: [-3, 3, -3], dur: 3.5 },
+              // 3: Above text
+              { color: "from-rose-400 to-pink-500", stringH: "h-7 sm:h-9", rot: [5, -5, 5], dur: 4.1 },
+              // 4: Below text
+              { color: "from-emerald-300 to-teal-400", stringH: "h-36 sm:h-42", rot: [-4, 4, -4], dur: 3.6 },
+              // 5: Above text
+              { color: "from-sky-300 to-blue-400", stringH: "h-6 sm:h-8", rot: [3, -3, 3], dur: 3.9 },
+              // 6: Below text
+              { color: "from-fuchsia-400 to-purple-600", stringH: "h-38 sm:h-44", rot: [-5, 5, -5], dur: 3.4 },
             ].map((balloon, i) => (
               <motion.div
                 key={i}
@@ -58,8 +65,8 @@ export default function LightsStage({ onNextStep }) {
                 }}
                 className="flex flex-col items-center origin-top"
               >
-                {/* Long string reaching down from ceiling so balloons hang safely below header */}
-                <div className={`w-[1px] ${balloon.stringH} bg-slate-400/50`} />
+                {/* String hanging down */}
+                <div className={`w-[1px] ${balloon.stringH} bg-slate-400/40`} />
                 {/* Knot */}
                 <div className="w-2 h-1 bg-black/30 rounded-t-xs" />
                 {/* 3D Glossy Balloon Body */}
@@ -75,27 +82,27 @@ export default function LightsStage({ onNextStep }) {
         )}
       </AnimatePresence>
 
-      {/* Floating party flags / Bunting (placed cleanly below header, when light is ON) */}
+      {/* Floating party flags / Bunting (placed cleanly in middle band, z-20, no balloon bodies overlap) */}
       <AnimatePresence>
         {isLightOn && (
           <motion.div
             initial={{ opacity: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleY: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="absolute top-24 sm:top-28 inset-x-0 flex justify-center gap-1 sm:gap-1.5 px-2 pointer-events-none z-10"
+            className="absolute top-20 sm:top-24 inset-x-0 flex justify-center gap-1 sm:gap-1.5 px-2 pointer-events-none z-20"
           >
             {["শু", "ভ", " ", "জ", "ন্ম", "দি", "ন", " ", "ফা", "তে", "মা", " ", "আ", "পু", "!", "👑"].map(
               (char, idx) => (
                 <motion.span
                   key={idx}
-                  animate={{ y: [0, -3, 0] }}
+                  animate={{ y: [0, -2, 0] }}
                   transition={{
                     duration: 2,
                     delay: idx * 0.08,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className={`px-1.5 py-1 sm:px-2.5 sm:py-1.5 rounded-b-lg sm:rounded-b-xl text-[11px] sm:text-xs md:text-sm font-black shadow-sm ${
+                  className={`px-1.5 py-1 sm:px-2.5 sm:py-1.5 rounded-b-lg sm:rounded-b-xl text-[11px] sm:text-xs md:text-sm font-black shadow-md border-t border-white/40 ${
                     char === " "
                       ? "w-1 sm:w-2"
                       : idx % 3 === 0
@@ -163,7 +170,7 @@ export default function LightsStage({ onNextStep }) {
             initial={{ opacity: 0, scale: 0.85, y: 25 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center mt-14 sm:mt-8"
+            className="flex flex-col items-center mt-32 sm:mt-28"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/90 text-pink-600 border border-pink-200/80 text-xs sm:text-sm font-bold mb-4 shadow-sm">
               <PartyPopper className="w-4 h-4 text-pink-500" />
