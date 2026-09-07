@@ -105,7 +105,7 @@ export default function CandlesStage({ onNextStep }) {
               >
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-100 text-pink-700 text-xs font-bold mb-2">
                   <Sparkles className="w-3.5 h-3.5 text-pink-500" />
-                  <span>মোমবাতি নিভে উইশ আকাশে পৌঁছাল!</span>
+                  <span>উইশ করা সম্পন্ন! 🎂</span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-800 mb-1.5">
                   {candles.wishUnlockedTitle}

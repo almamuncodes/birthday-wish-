@@ -13,7 +13,7 @@ export default function RealisticBirthdayCake({
   onCutCake,
   showSmoke = false,
 }) {
-  const { cakePlaqueText, englishName, sisterName } = birthdayData;
+  const { cakePlaqueText, englishName, sisterName, fullName } = birthdayData;
 
   return (
     <div className="relative w-full max-w-[420px] h-[370px] sm:h-[410px] mx-auto flex flex-col items-center justify-end select-none">
@@ -108,8 +108,8 @@ export default function RealisticBirthdayCake({
             ))}
           </div>
 
-          {/* Golden Chocolate Plaque with Sister's Name: Happy Birthday Fatimatuj Johura */}
-          <div className="relative z-10 px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 border border-amber-300 shadow-lg text-center max-w-[90%]">
+          {/* Golden Chocolate Plaque with Sister's Name: Happy Birthday Fatema Tuz Zohra */}
+          <div className="relative z-10 px-3.5 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 border border-amber-300 shadow-lg text-center max-w-[95%]">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/20 to-transparent pointer-events-none" />
             <p className="text-[10px] uppercase font-bold tracking-wider text-amber-200">
               Happy Birthday
@@ -156,11 +156,11 @@ export default function RealisticBirthdayCake({
             ))}
           </div>
 
-          {/* Decorative Sparkles & Heart Accents */}
-          <div className="flex items-center gap-3 text-pink-700/80 font-bold text-xs sm:text-sm">
+          {/* Decorative Sparkles & Full Name Accent */}
+          <div className="flex items-center gap-2 text-pink-700 font-bold text-xs sm:text-sm">
             <span>✨</span>
-            <span className="bg-white/70 px-3 py-1 rounded-full border border-white/80 shadow-xs">
-              👑 {sisterName}
+            <span className="bg-white/80 px-3.5 py-1 rounded-full border border-pink-200/80 shadow-xs">
+              👑 {fullName || sisterName}
             </span>
             <span>✨</span>
           </div>
